@@ -1,0 +1,68 @@
+object Form1: TForm1
+  Left = 318
+  Height = 400
+  Top = 196
+  Width = 600
+  Caption = 'Mass PDF signer'
+  ClientHeight = 400
+  ClientWidth = 600
+  LCLVersion = '1.6.0.4'
+  object Label1: TLabel
+    Left = 195
+    Height = 45
+    Top = 8
+    Width = 211
+    Caption = 'Mass PDF sign'
+    Font.CharSet = GREEK_CHARSET
+    Font.Height = -37
+    Font.Name = 'Calibri'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 230
+    Height = 29
+    Top = 56
+    Width = 140
+    Caption = 'Using JSignPdf'
+    Font.CharSet = GREEK_CHARSET
+    Font.Height = -24
+    Font.Name = 'Calibri'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+  end
+  object Label3: TLabel
+    Left = 16
+    Height = 15
+    Top = 120
+    Width = 179
+    Caption = 'Directory containing PDFs to sign:'
+    ParentColor = False
+  end
+  object folderEdit: TEdit
+    Left = 200
+    Height = 23
+    Top = 117
+    Width = 264
+    ParentShowHint = False
+    ReadOnly = True
+    TabOrder = 0
+  end
+  object fileBrowseButton: TButton
+    Left = 480
+    Height = 25
+    Top = 117
+    Width = 75
+    Caption = 'Browse...'
+    OnClick = fileBrowseButtonClick
+    TabOrder = 1
+  end
+  object selectFolderDialog: TSelectDirectoryDialog
+    left = 56
+    top = 24
+  end
+end
