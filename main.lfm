@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 318
+  Left = 369
   Height = 400
-  Top = 196
+  Top = 200
   Width = 600
   Caption = 'Mass PDF signer'
   ClientHeight = 400
@@ -44,10 +44,10 @@ object Form1: TForm1
     ParentColor = False
   end
   object folderEdit: TEdit
-    Left = 200
+    Left = 230
     Height = 23
     Top = 117
-    Width = 264
+    Width = 234
     ParentShowHint = False
     ReadOnly = True
     TabOrder = 0
@@ -60,6 +60,32 @@ object Form1: TForm1
     Caption = 'Browse...'
     OnClick = fileBrowseButtonClick
     TabOrder = 1
+  end
+  object pdfDescriptionLabel: TLabel
+    Left = 16
+    Height = 15
+    Top = 168
+    Width = 148
+    Caption = 'Please select a directory first'
+    ParentColor = False
+  end
+  object signPdfsButton: TButton
+    Left = 230
+    Height = 25
+    Top = 164
+    Width = 325
+    Caption = 'Sign all files'
+    Enabled = False
+    OnClick = signPdfsButtonClick
+    TabOrder = 2
+  end
+  object GroupBox1: TGroupBox
+    Left = 16
+    Height = 152
+    Top = 216
+    Width = 536
+    Caption = 'Advanced options'
+    TabOrder = 3
   end
   object selectFolderDialog: TSelectDirectoryDialog
     left = 56
