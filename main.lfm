@@ -1,8 +1,10 @@
 object Form1: TForm1
-  Left = 369
+  Left = 420
   Height = 400
-  Top = 200
+  Top = 196
   Width = 600
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
   Caption = 'Mass PDF signer'
   ClientHeight = 400
   ClientWidth = 600
@@ -81,11 +83,39 @@ object Form1: TForm1
   end
   object GroupBox1: TGroupBox
     Left = 16
-    Height = 152
+    Height = 168
     Top = 216
     Width = 536
     Caption = 'Advanced options'
+    ClientHeight = 148
+    ClientWidth = 532
     TabOrder = 3
+    object Label4: TLabel
+      Left = 8
+      Height = 30
+      Top = 8
+      Width = 493
+      Caption = 'JSignPdf Location. If you have installed JSignPdf to a different than the default location please'#13#10'select it here:'
+      ParentColor = False
+    end
+    object jsignpdfLocation: TEdit
+      Left = 8
+      Height = 23
+      Top = 48
+      Width = 392
+      ReadOnly = True
+      TabOrder = 0
+      Text = 'C:\Program Files (x86)\JSignPdf'
+    end
+    object changeJsignpdfLocation: TButton
+      Left = 424
+      Height = 25
+      Top = 46
+      Width = 75
+      Caption = 'Change'
+      OnClick = changeJsignpdfLocationClick
+      TabOrder = 1
+    end
   end
   object selectFolderDialog: TSelectDirectoryDialog
     left = 56

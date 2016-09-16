@@ -5,14 +5,17 @@ unit main;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls, Process;
+  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls, Process, LConvEncoding;
 
 type
 
   { TForm1 }
 
   TForm1 = class(TForm)
+    changeJsignpdfLocation: TButton;
+    jsignpdfLocation: TEdit;
     GroupBox1: TGroupBox;
+    Label4: TLabel;
     signPdfsButton: TButton;
     fileBrowseButton: TButton;
     folderEdit: TEdit;
@@ -22,6 +25,7 @@ type
     pdfDescriptionLabel: TLabel;
     selectFolderDialog: TSelectDirectoryDialog;
     pdfFiles: TStringList;
+    procedure changeJsignpdfLocationClick(Sender: TObject);
     procedure fileBrowseButtonClick(Sender: TObject);
     procedure findFiles();
     procedure signPdfsButtonClick(Sender: TObject);
@@ -53,9 +57,18 @@ begin
       end;
 end;
 
+procedure TForm1.changeJsignpdfLocationClick(Sender: TObject);
+begin
+     if selectFolderDialog.Execute then
+     begin
+        jsignpdfLocation.text := selectFolderDialog.FileName;
+     end;
+end;
+
 procedure TForm1.findFiles();
 begin
-      pdfFiles := FindAllFiles(folder, '*.pdf;*.*', False);
+      //pdfFiles := FindAllFiles(folder, '*.pdf;*.*', False);
+      pdfFiles := FindAllFiles(folder, '*.pdf', False);
       try
           //showmessage(Format('Found %d pdf files',[pdfFiles.Count]));
           pdfDescriptionLabel.Caption:=Format('Found %d pdf files',[pdfFiles.Count]);
@@ -71,16 +84,31 @@ end;
 procedure TForm1.signPdfsButtonClick(Sender: TObject);
 var s: ansistring;
 begin
-    showmessage('Will try to run JSignPDF to sign all pdfs of folder ' + folder +'...');
+    showmessage('Will try to run JSignPDF to sign all pdfs found in folder ' + folder +'...');
 
-    if RunCommand('D:\Util\curl.exe', ['www.google.com'], s) then
+    if RunCommandIndir(folder,
+       jsignpdfLocation.text+'\JSignPdfC.exe',
+       ['-lpf', 'C:\Users\serafeim\.JSignPdf', '*.pdf'],
+       //['-lpf C:\Users\serafeim\.JSignPdf *.pdf'],
+       s
+       )
+    then
     begin
          showmessage('Success!');
-         showmessage(s) ;
+         // showmessage(CP1253ToUTF8 (s)) ;
     end
     else
     begin
-        showmessage('Error while trying to run JSignPDF') ;
+        if length(s)>0
+        then
+        begin
+                showmessage('Errors while trying to run JSignPDF. Press Ok to see the output and try to correct problems!') ;
+                showmessage(CP1253ToUTF8 (s)) ;
+        end
+        else
+        begin
+                showmessage('Unable to run JSignPdf. Have you selected the correct location?') ;
+        end;
     end;
 end;
 
