@@ -67,19 +67,26 @@ object Form1: TForm1
   object pdfDescriptionLabel: TLabel
     Left = 16
     Height = 15
-    Top = 168
+    Top = 176
     Width = 148
     Caption = 'Please select a directory first'
     ParentColor = False
   end
   object signPdfsButton: TButton
     Left = 232
-    Height = 25
+    Height = 40
     Top = 164
     Width = 539
     Caption = 'Sign all files'
     Enabled = False
+    Font.CharSet = GREEK_CHARSET
+    Font.Height = -27
+    Font.Name = 'Calibri'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
     OnClick = signPdfsButtonClick
+    ParentFont = False
     TabOrder = 2
   end
   object GroupBox1: TGroupBox
@@ -130,6 +137,7 @@ object Form1: TForm1
       Height = 23
       Top = 248
       Width = 592
+      ReadOnly = True
       TabOrder = 2
     end
     object Button1: TButton

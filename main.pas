@@ -7,14 +7,13 @@ interface
 uses
   Classes, SysUtils, FileUtil, Forms, Controls,
   Graphics, Dialogs, StdCtrls, Process, LConvEncoding,
-  Windows, LCLIntf, Messages,  ActiveX, ShellAPI, ShlObj  ;
+  Windows, LCLIntf, Menus, ShlObj  ;
 
 type
 
   { TForm1 }
 
   TForm1 = class(TForm)
-    Button1: TButton;
     changeJsignpdfLocation: TButton;
     selectFileDialog: TOpenDialog;
     propertiesLocation: TEdit;
