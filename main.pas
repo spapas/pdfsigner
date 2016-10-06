@@ -5,17 +5,23 @@ unit main;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls, Process, LConvEncoding;
+  Classes, SysUtils, FileUtil, Forms, Controls,
+  Graphics, Dialogs, StdCtrls, Process, LConvEncoding,
+  Windows, LCLIntf, Messages,  ActiveX, ShellAPI, ShlObj  ;
 
 type
 
   { TForm1 }
 
   TForm1 = class(TForm)
+    Button1: TButton;
     changeJsignpdfLocation: TButton;
+    selectFileDialog: TOpenDialog;
+    propertiesLocation: TEdit;
     jsignpdfLocation: TEdit;
     GroupBox1: TGroupBox;
     Label4: TLabel;
+    Label5: TLabel;
     signPdfsButton: TButton;
     fileBrowseButton: TButton;
     folderEdit: TEdit;
@@ -25,9 +31,11 @@ type
     pdfDescriptionLabel: TLabel;
     selectFolderDialog: TSelectDirectoryDialog;
     pdfFiles: TStringList;
+    procedure changePropertiesLocationClick(Sender: TObject);
     procedure changeJsignpdfLocationClick(Sender: TObject);
     procedure fileBrowseButtonClick(Sender: TObject);
     procedure findFiles();
+    procedure FormShow(Sender: TObject);
     procedure signPdfsButtonClick(Sender: TObject);
   private
     { private declarations }
@@ -65,6 +73,14 @@ begin
      end;
 end;
 
+procedure TForm1.changePropertiesLocationClick(Sender: TObject);
+begin
+     if selectFileDialog.Execute then
+     begin
+        propertiesLocation.text := selectFileDialog.FileName;
+     end;
+end;
+
 procedure TForm1.findFiles();
 begin
       //pdfFiles := FindAllFiles(folder, '*.pdf;*.*', False);
@@ -81,6 +97,19 @@ begin
       end;
 end;
 
+procedure TForm1.FormShow(Sender: TObject);
+var
+  PIDL : PItemIDList;
+  homedir : array[0..MAX_PATH] of Char;
+  const CSIDL_PROFILE = 40;
+begin
+  homedir:='';
+  SHGetSpecialFolderLocation(0, CSIDL_PROFILE, PIDL);
+  SHGetPathFromIDList(PIDL, homedir);
+  propertiesLocation.text:=homedir+'\.JSignPdf';
+end;
+
+
 procedure TForm1.signPdfsButtonClick(Sender: TObject);
 var s: ansistring;
 begin
@@ -88,7 +117,8 @@ begin
 
     if RunCommandIndir(folder,
        jsignpdfLocation.text+'\JSignPdfC.exe',
-       ['-lpf', 'C:\Users\serafeim\.JSignPdf', '*.pdf'],
+       ['-lpf', propertiesLocation.Text, '*.pdf'],
+       //['-lpf', 'C:\Users\serafeim\.JSignPdf', '*.pdf'],
        //['-lpf C:\Users\serafeim\.JSignPdf *.pdf'],
        s
        )

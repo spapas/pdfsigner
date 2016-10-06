@@ -1,16 +1,17 @@
 object Form1: TForm1
   Left = 420
-  Height = 400
+  Height = 542
   Top = 196
-  Width = 600
+  Width = 800
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'Mass PDF signer'
-  ClientHeight = 400
-  ClientWidth = 600
+  ClientHeight = 542
+  ClientWidth = 800
+  OnShow = FormShow
   LCLVersion = '1.6.0.4'
   object Label1: TLabel
-    Left = 195
+    Left = 295
     Height = 45
     Top = 8
     Width = 211
@@ -24,7 +25,7 @@ object Form1: TForm1
     ParentFont = False
   end
   object Label2: TLabel
-    Left = 230
+    Left = 330
     Height = 29
     Top = 56
     Width = 140
@@ -49,13 +50,13 @@ object Form1: TForm1
     Left = 230
     Height = 23
     Top = 117
-    Width = 234
+    Width = 442
     ParentShowHint = False
     ReadOnly = True
     TabOrder = 0
   end
   object fileBrowseButton: TButton
-    Left = 480
+    Left = 696
     Height = 25
     Top = 117
     Width = 75
@@ -72,10 +73,10 @@ object Form1: TForm1
     ParentColor = False
   end
   object signPdfsButton: TButton
-    Left = 230
+    Left = 232
     Height = 25
     Top = 164
-    Width = 325
+    Width = 539
     Caption = 'Sign all files'
     Enabled = False
     OnClick = signPdfsButtonClick
@@ -83,12 +84,12 @@ object Form1: TForm1
   end
   object GroupBox1: TGroupBox
     Left = 16
-    Height = 168
+    Height = 312
     Top = 216
-    Width = 536
+    Width = 755
     Caption = 'Advanced options'
-    ClientHeight = 148
-    ClientWidth = 532
+    ClientHeight = 292
+    ClientWidth = 751
     TabOrder = 3
     object Label4: TLabel
       Left = 8
@@ -102,23 +103,51 @@ object Form1: TForm1
       Left = 8
       Height = 23
       Top = 48
-      Width = 392
+      Width = 592
       ReadOnly = True
       TabOrder = 0
       Text = 'C:\Program Files (x86)\JSignPdf'
     end
     object changeJsignpdfLocation: TButton
-      Left = 424
+      Left = 648
       Height = 25
-      Top = 46
-      Width = 75
+      Top = 48
+      Width = 73
       Caption = 'Change'
       OnClick = changeJsignpdfLocationClick
       TabOrder = 1
+    end
+    object Label5: TLabel
+      Left = 8
+      Height = 150
+      Top = 88
+      Width = 738
+      Caption = 'By default, JSignPdf uses a file named ".JSignPdf" in your home directory to store its settings. When JSignPdf is run it  will create this file and '#13#10'update it when the settings are changed. '#13#10#13#10'Mass PDF sign will use that file to massively sign the files, so you have to run JSignPdf with one sample pdf (similar to the ones contained in'#13#10'the folder you want to mass sign) to update the file with the correct settigns for these pdfs and then use Mass PDF sign to sign all other pdfs'#13#10'contained in that folder.'#13#10#13#10'If you don''t want to use the current settings file JSignPdf (for example you may have various different setting files depending on the kind of '#13#10'pdfs you want to massively sign) or (for some reason) JSignPdf does not save the settings file in that location then please select the settings '#13#10'file you want to use below:'
+      ParentColor = False
+    end
+    object propertiesLocation: TEdit
+      Left = 8
+      Height = 23
+      Top = 248
+      Width = 592
+      TabOrder = 2
+    end
+    object Button1: TButton
+      Left = 648
+      Height = 25
+      Top = 248
+      Width = 72
+      Caption = 'Change'
+      OnClick = changePropertiesLocationClick
+      TabOrder = 3
     end
   end
   object selectFolderDialog: TSelectDirectoryDialog
     left = 56
     top = 24
+  end
+  object selectFileDialog: TOpenDialog
+    left = 648
+    top = 32
   end
 end
